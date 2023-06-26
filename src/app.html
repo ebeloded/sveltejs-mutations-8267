@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover" id="kit-body">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+	<script>
+		// Callback function to execute when mutations are observed
+		const callback = (mutationList, observer) => {
+			for (const mutation of mutationList) {
+				console.log(mutation);
+			}
+		};
+
+		// Create an observer instance linked to the callback function
+		const observer = new MutationObserver(callback);
+
+		// Start observing the target node for configured mutations
+		observer.observe(document.getElementById('kit-body'), {
+			attributes: true,
+			childList: true,
+			subtree: true,
+			attributeOldValue: true
+		});
+	</script>
+</html>
